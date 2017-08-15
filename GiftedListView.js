@@ -172,6 +172,13 @@ var GiftedListView = React.createClass({
       <View style={[this.defaultStyles.separator, this.props.customStyles.separator]} />
     );
   },
+  componentDidMount() {
+    this.isMounted = true;
+  },
+
+  componentWillUnmount() {
+    this.isMounted = false;
+  }
 
   getInitialState() {
     this._setPage(1);
@@ -213,7 +220,7 @@ var GiftedListView = React.createClass({
   },
 
   _onRefresh(options = {}) {
-    if (this.isMounted()) {
+    if (this.isMounted) {
       this.setState({
         isRefreshing: true,
       });
@@ -223,7 +230,7 @@ var GiftedListView = React.createClass({
   },
 
   _postRefresh(rows = [], options = {}) {
-    if (this.isMounted()) {
+    if (this.isMounted) {
       this._updateRows(rows, options);
     }
   },
