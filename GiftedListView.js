@@ -172,13 +172,6 @@ var GiftedListView = React.createClass({
       <View style={[this.defaultStyles.separator, this.props.customStyles.separator]} />
     );
   },
-  componentDidMount() {
-    this.isMounted = true;
-  },
-
-  componentWillUnmount() {
-    this.isMounted = false;
-  }
 
   getInitialState() {
     this._setPage(1);
@@ -208,7 +201,12 @@ var GiftedListView = React.createClass({
   },
 
   componentDidMount() {
+    this.isMounted = true;
     this.props.onFetch(this._getPage(), this._postRefresh, {firstLoad: true});
+  },
+
+  componentWillUnmount() {
+    this.isMounted = false;
   },
 
   setNativeProps(props) {
